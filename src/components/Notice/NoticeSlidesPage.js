@@ -8,7 +8,6 @@ export default function NoticeSlidesPage({ notice }) {
   const handleImageLoaded = () => {
     setIsLoading(false);
   };
-
   return (
     <View className="w-full h-full flex-1 justify-center items-center">
       <Text className="text-2xl">{notice.title}</Text>

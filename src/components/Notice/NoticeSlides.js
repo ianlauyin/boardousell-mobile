@@ -23,9 +23,9 @@ export default function NoticeSlides() {
     fetchNotice();
   }, []);
   return (
-    <View>
+    <View className="w-full h-52">
       {notices ? (
-        <PagerView className="flex-1 w-full h-52">
+        <PagerView className="flex-1 w-full h-full">
           {notices.map((notice) => (
             <NoticeSlidesPage notice={notice} key={notice.id} />
           ))}
