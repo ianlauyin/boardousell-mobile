@@ -3,6 +3,7 @@ import { ActivityIndicator, View } from "react-native";
 import PagerView from "react-native-pager-view";
 import NoticeSlidesPage from "./NoticeSlidesPage";
 import axios from "axios";
+import showError from "../../utils/showError";
 
 export default function NoticeSlides() {
   const [notices, setNotices] = useState(null);
