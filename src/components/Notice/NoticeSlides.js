@@ -15,6 +15,7 @@ export default function NoticeSlides() {
         );
         setNotices(noticesRes.data);
       } catch (error) {
+        setNotices([]);
         showError(
           error.message,
           "Cannot load notices, Please try again later."
@@ -28,11 +29,7 @@ export default function NoticeSlides() {
       {notices ? (
         <PagerView className="flex-1 w-full h-full">
           {notices.map((notice) => (
-            <NoticeSlidesPage
-              testID={notice.id}
-              notice={notice}
-              key={notice.id}
-            />
+            <NoticeSlidesPage notice={notice} key={notice.id} />
           ))}
         </PagerView>
       ) : (
