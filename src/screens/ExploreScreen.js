@@ -6,7 +6,8 @@ import ProductCardList from "../components/Product/ProductCardList";
 
 const resultPerPage = 5;
 const scrollThrottleValue = 1;
-export default function ExploreScreen({ navigation }) {
+export default function ExploreScreen({ navigation, route }) {
+  const { search } = route.params;
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,10 +19,18 @@ export default function ExploreScreen({ navigation }) {
   const loadProduct = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get(
-        `${process.env.EXPO_PUBLIC_BACKENDURL}/product/search?limit=${resultPerPage}&page=${currentPage}`
-      );
-      setProducts((prev) => [...prev, ...data.data]);
+      let data;
+      if (search) {
+        data = await axios.get(
+          `${process.env.EXPO_PUBLIC_BACKENDURL}/product/search?keyword=${search}&limit=${resultPerPage}&page=${currentPage}`
+        );
+      } else {
+        data = await axios.get(
+          `${process.env.EXPO_PUBLIC_BACKENDURL}/product/search?limit=${resultPerPage}&page=${currentPage}`
+        );
+      }
+
+      setProducts((prev) => [...prev, ...data.data.data]);
     } catch (error) {
       showError(error.message, "Cannot load products, Please try again later");
     }

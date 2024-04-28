@@ -52,12 +52,18 @@ export default function ProductScreen({ route }) {
   }
   return (
     <ScrollView className="bg-base-100 w-full p-5">
-      <View className="bg-base-300 rounded-xl p-5">
+      <View className="bg-base-300 rounded-xl p-5 mb-10">
         {photoList.length && (
           <PagerView className="w-full h-72">
-            {photoList.map((source, i) => (
-              <ProductPhoto source={source} key={i} />
-            ))}
+            {photoList.map((source, i) => {
+              console.log(i);
+              return (
+                <ProductPhoto
+                  source={source}
+                  key={`product${product.id}photo${i}`}
+                />
+              );
+            })}
           </PagerView>
         )}
         <Text className="text-3xl py-5">{product.name}</Text>
