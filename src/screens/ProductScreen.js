@@ -55,15 +55,9 @@ export default function ProductScreen({ route }) {
       <View className="bg-base-300 rounded-xl p-5 mb-10">
         {photoList.length && (
           <PagerView className="w-full h-72">
-            {photoList.map((source, i) => {
-              console.log(i);
-              return (
-                <ProductPhoto
-                  source={source}
-                  key={`product${product.id}photo${i}`}
-                />
-              );
-            })}
+            {photoList.map((source, i) => (
+              <ProductPhoto source={source} key={i} />
+            ))}
           </PagerView>
         )}
         <Text className="text-3xl py-5">{product.name}</Text>
@@ -104,8 +98,10 @@ export default function ProductScreen({ route }) {
         </View>
         <Text className="mt-5">Categories: </Text>
         <View className="flex-row flex-wrap ">
-          {product.categories.map(({ name }) => (
-            <Text className="underline ml-5 mt-2">{name}</Text>
+          {product.categories.map(({ id, name }) => (
+            <Text key={id} className="underline ml-5 mt-2">
+              {name}
+            </Text>
           ))}
         </View>
       </View>
