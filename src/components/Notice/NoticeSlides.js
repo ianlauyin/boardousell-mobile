@@ -33,7 +33,7 @@ export default function NoticeSlides() {
         </PagerView>
       ) : (
         <View className="w-full h-12">
-          <ActivityIndicator size="large" />
+          <ActivityIndicator id="SlidesLoader" size="large" />
         </View>
       )}
     </View>

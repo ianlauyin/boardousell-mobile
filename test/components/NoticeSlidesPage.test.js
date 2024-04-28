@@ -1,5 +1,5 @@
 import NoticeSlidesPage from "../../src/components/Notice/NoticeSlidesPage";
-import TestRenderer, { act } from "react-test-renderer";
+import { create, act } from "react-test-renderer";
 import defaultImage from "../../src/components/Notice/img/notice-default.png";
 
 describe("screens/NoticeSlidesPage", () => {
@@ -10,9 +10,7 @@ describe("screens/NoticeSlidesPage", () => {
   };
   let instance;
 
-  const component = TestRenderer.create(
-    <NoticeSlidesPage notice={mockNotice} />
-  );
+  const component = create(<NoticeSlidesPage notice={mockNotice} />);
   instance = component.root;
 
   it("Will show Title even the image haven't been loaded", () => {
@@ -37,7 +35,7 @@ describe("screens/NoticeSlidesPage", () => {
   });
 
   it("Will have a default image if no url", () => {
-    const componentWithoutURL = TestRenderer.create(
+    const componentWithoutURL = create(
       <NoticeSlidesPage notice={mockNoticeWithoutURL} />
     );
     instanceWithoutURL = componentWithoutURL.root;
