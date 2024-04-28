@@ -11,7 +11,7 @@ export default function NoticeSlides() {
     const fetchNotice = async () => {
       try {
         const noticesRes = await axios.get(
-          `${process.env.EXPO_PUBLIC_BACKENDURL}/notice`
+          `${process.env.EXPO_PUBLIC_BACKENDURL}/notice/`
         );
         setNotices(noticesRes.data);
       } catch (error) {
