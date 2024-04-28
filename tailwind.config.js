@@ -18,7 +18,14 @@ getAllJSFile("./src/screens");
 module.exports = {
   content: componentFiles,
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        accent: "#88c0d0",
+        base: {
+          100: "#e5e9f0",
+        },
+      },
+    },
   },
   plugins: [],
 };

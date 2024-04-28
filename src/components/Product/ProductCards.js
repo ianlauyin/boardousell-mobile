@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ActivityIndicator, Button, Image, Text, View } from "react-native";
 import noImage from "./img/no-image.jpg";
 import getDiscountPrice from "../../utils/getDiscountPrice";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default function ProductCard({ product }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,10 +13,10 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <View className="w-72 self-center">
+    <View className="w-72 mb-8 self-center bg-accent rounded-xl p-5">
       <View>
         {isLoading && (
-          <View className="absolute">
+          <View className="absolute self-center">
             <ActivityIndicator
               testID="notice-activity-indicator"
               size="large"
@@ -26,25 +27,37 @@ export default function ProductCard({ product }) {
           testID="product-image"
           source={productImage}
           onLoadEnd={handleImageLoaded}
-          className="w-52 h-52"
+          className="w-52 h-52 self-center"
         />
       </View>
-      <Text>{product.name}</Text>
-      <View className="flex-row">
+      <Text className="text-xl mt-2">{product.name}</Text>
+      <View className="flex-row ">
         {product.onsale && (
-          <Text className="text-red-600 text-bold">
-            {getDiscountPrice(product.price, product.onsale.discount)}
+          <Text className="text-red-600 font-bold">
+            HKD${getDiscountPrice(product.price, product.onsale.discount)}
           </Text>
         )}
         <Text className={product.onsale && "line-through"}>
-          {product.price}
+          HK${product.price}
         </Text>
       </View>
-      <View className="flex-row">
-        <Text>Stock: {product.stock}</Text>
-        <View className="flex-row justify-between">
-          <Button title="1" />
-          <Button title="2" />
+      <View className="flex-row mt-2">
+        <Text className="self-end flex-1">Stock: {product.stock}</Text>
+        <View className="flex-row justify-between flex-1">
+          <Icon.Button
+            className="bg-base-100"
+            color="black"
+            size={30}
+            iconStyle={{ margin: 6, marginRight: 6 }}
+            name="stars"
+          />
+          <Icon.Button
+            className="bg-base-100"
+            color="black"
+            size={30}
+            iconStyle={{ margin: 6, marginRight: 6 }}
+            name="shopping-cart"
+          />
         </View>
       </View>
     </View>

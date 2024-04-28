@@ -7,12 +7,11 @@ import axios from "axios";
 
 export default function HomeScreen() {
   const [newProducts, setNewProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true);
         const productDataRes = await axios.get(
           `${process.env.EXPO_PUBLIC_BACKENDURL}/product/new`
         );
@@ -32,9 +31,9 @@ export default function HomeScreen() {
     );
   }
   return (
-    <ScrollView>
+    <ScrollView className="bg-base-100">
       <NoticeSlides />
-      <Text className="self-center font-bold">New arrivals:</Text>
+      <Text className="self-center text-xl font-bold my-4">New arrivals:</Text>
       <ProductCardList products={newProducts} />
     </ScrollView>
   );
