@@ -13,7 +13,8 @@ const getAllJSFile = (currentPath) => {
     }
   }
 };
-getAllJSFile("./src");
+getAllJSFile("./src/components");
+getAllJSFile("./src/screens");
 module.exports = {
   content: componentFiles,
   theme: {
