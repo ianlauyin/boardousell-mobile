@@ -28,12 +28,16 @@ export default function NoticeSlides() {
       {notices ? (
         <PagerView className="flex-1 w-full h-full">
           {notices.map((notice) => (
-            <NoticeSlidesPage notice={notice} key={notice.id} />
+            <NoticeSlidesPage
+              testID={notice.id}
+              notice={notice}
+              key={notice.id}
+            />
           ))}
         </PagerView>
       ) : (
         <View className="w-full h-12">
-          <ActivityIndicator id="SlidesLoader" size="large" />
+          <ActivityIndicator testID="slides-activity-indicator" size="large" />
         </View>
       )}
     </View>

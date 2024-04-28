@@ -1,36 +1,32 @@
 import axios from "axios";
+import { act, render, screen } from "@testing-library/react-native";
 import NoticeSlides from "../../src/components/Notice/NoticeSlides";
-import { create, act } from "react-test-renderer";
 import React from "react";
 
 jest.mock("axios");
 
-describe.skip("component/NoticeSlides", () => {
-  let component;
+describe("component/NoticeSlides", () => {
   let useEffect;
-
   const mockUseEffect = jest.spyOn(React, "useEffect");
   mockUseEffect.mockImplementation((effect) => {
     useEffect = effect;
   });
-
-  beforeEach(() => {
-    act(() => {
-      component = create(<NoticeSlides />);
-    });
-  });
   it("renders loading indicator initially", () => {
-    expect(component.root.findByType("ActivityIndicator")).toBeTruthy();
+    render(<NoticeSlides />);
+    const activityIndicator = screen.getByTestId("slides-activity-indicator");
+    expect(activityIndicator).toBeTruthy();
   });
 
-  it("displays notices after data fetch", async () => {
+  it.skip("displays notices after data fetch", async () => {
     const mockNotices = [
       { id: 1, title: "Notice 1" },
       { id: 2, title: "Notice 2" },
     ];
-    axios.get.mockResolvedValue({ data: mockNotices });
+    await jest.spyOn(axios, "get").mockResolvedValue({ data: mockNotices });
+    render(<NoticeSlides />);
     await act(async () => await useEffect());
-    expect(component.root.findByProps({ notice: mockNotices[0] })).toBeTruthy();
-    expect(component.root.findByProps({ notice: mockNotices[1] })).toBeTruthy();
+    expect(screen.getByTestId(mockNotices[0].id)).toBeTruthy();
+    expect(screen.getByTestId(mockNotices[1].id)).toBeTruthy();
+    expect(screen.queryByTestId("slides-activity-indicator")).toBeNull();
   });
 });
