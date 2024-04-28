@@ -1,5 +1,6 @@
 import { TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 export default function NavBar({ navigation }) {
   return (
@@ -8,11 +9,11 @@ export default function NavBar({ navigation }) {
         className="flex-1 items-center"
         onPress={() => navigation.navigate("Explore")}
       >
-        <Icon
+        <MaterialIcon
           color="black"
           size={30}
           iconStyle={{ margin: 6, marginRight: 6 }}
-          name="isv"
+          name="explore"
         />
       </TouchableOpacity>
       <TouchableOpacity
