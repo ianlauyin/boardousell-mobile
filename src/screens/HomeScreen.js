@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import showError from "../utils/showError";
 import axios from "axios";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [newProducts, setNewProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,7 +34,7 @@ export default function HomeScreen() {
     <ScrollView className="bg-base-100">
       <NoticeSlides />
       <Text className="self-center text-xl font-bold my-4">New arrivals:</Text>
-      <ProductCardList products={newProducts} />
+      <ProductCardList products={newProducts} navigation={navigation} />
     </ScrollView>
   );
 }

@@ -6,7 +6,7 @@ import ProductCardList from "../components/Product/ProductCardList";
 
 const resultPerPage = 5;
 const scrollThrottleValue = 1;
-export default function ExploreScreen() {
+export default function ExploreScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,8 +42,8 @@ export default function ExploreScreen() {
       onScroll={handleScroll}
       scrollEventThrottle={scrollThrottleValue}
     >
-      <Text className="text-xl">All Products:</Text>
-      <ProductCardList products={products} />
+      <Text className="text-xl font-bold p-5">All Products:</Text>
+      <ProductCardList products={products} navigation={navigation} />
       {isLoading && <ActivityIndicator size="large" />}
     </ScrollView>
   );
