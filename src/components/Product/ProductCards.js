@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ActivityIndicator, Button, Image, Text, View } from "react-native";
+import { ActivityIndicator, Image, Text, View } from "react-native";
 import noImage from "./img/no-image.jpg";
 import getDiscountPrice from "../../utils/getDiscountPrice";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -45,6 +45,7 @@ export default function ProductCard({ product }) {
         <Text className="self-end flex-1">Stock: {product.stock}</Text>
         <View className="flex-row justify-between flex-1">
           <Icon.Button
+            disabled
             className="bg-base-100"
             color="black"
             size={30}
@@ -52,6 +53,7 @@ export default function ProductCard({ product }) {
             name="stars"
           />
           <Icon.Button
+            disabled
             className="bg-base-100"
             color="black"
             size={30}

@@ -1,19 +1,25 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
+import NavBar from "./src/components/Navigation/NavBar";
+import ExploreScreen from "./src/screens/ExploreScreen";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: "Welcome to Boardousell" }}
-        />
-      </Stack.Navigator>
+      <Tab.Navigator
+        tabBar={(props) => <NavBar {...props} />}
+        screenOptions={{
+          headerStatusBarHeight: 0,
+          title: "",
+          headerStyle: { backgroundColor: "#e5e9f0" },
+        }}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Explore" component={ExploreScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

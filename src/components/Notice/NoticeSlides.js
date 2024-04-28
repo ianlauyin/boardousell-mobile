@@ -33,7 +33,7 @@ export default function NoticeSlides() {
           ))}
         </PagerView>
       ) : (
-        <View className="w-full h-12">
+        <View className="w-full h-12 self-center items-center justify-center">
           <ActivityIndicator testID="slides-activity-indicator" size="large" />
         </View>
       )}

@@ -24,6 +24,7 @@ module.exports = {
         base: {
           100: "#e5e9f0",
         },
+        footer: "#4c566a",
       },
     },
   },

@@ -1,12 +1,12 @@
-import { SafeAreaView } from "react-native";
+import { View } from "react-native";
 import ProductCard from "./ProductCards";
 
 export default function ProductCardList({ products }) {
   return (
-    <SafeAreaView>
-      {products.map((product) => (
-        <ProductCard product={product} key={product.id} />
+    <View>
+      {products.map((product, i) => (
+        <ProductCard product={product} key={i} />
       ))}
-    </SafeAreaView>
+    </View>
   );
 }
