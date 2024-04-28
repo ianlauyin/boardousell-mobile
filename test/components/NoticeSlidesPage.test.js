@@ -1,45 +1,44 @@
+import React from "react";
+import { act, cleanup, render, screen } from "@testing-library/react-native";
 import NoticeSlidesPage from "../../src/components/Notice/NoticeSlidesPage";
-import { create, act } from "react-test-renderer";
 import defaultImage from "../../src/components/Notice/img/notice-default.png";
 
 describe("screens/NoticeSlidesPage", () => {
   const mockNoticeWithoutURL = { title: "Notice title" };
   const mockNotice = {
-    title: "Notice title",
+    url: "http://localhost",
     ...mockNoticeWithoutURL,
   };
-  let instance;
 
-  const component = create(<NoticeSlidesPage notice={mockNotice} />);
-  instance = component.root;
-
-  it("Will show Title even the image haven't been loaded", () => {
-    const titleElement = instance.findByType("Text");
-    expect(titleElement.props.children).toEqual(mockNotice.title);
+  it("Will show Title even the image haven't been loaded", async () => {
+    render(<NoticeSlidesPage notice={mockNotice} />);
+    const title = await screen.findByText(mockNotice.title);
+    expect(title).toBeTruthy();
   });
 
-  it("Will have a image have url given notice.url", () => {
-    const imageElement = instance.findByType("Image");
-    expect(imageElement.props.source.uri).toEqual(mockNotice.url);
+  it("Will have an image with the URL given notice.url", async () => {
+    render(<NoticeSlidesPage notice={mockNotice} />);
+    const image = screen.getByTestId("notice-image");
+    expect(image.props.source).toMatchObject({ uri: mockNotice.url });
   });
 
-  it("Will show a Activity when the photos haven't been loaded", () => {
-    const loadingIndicator = instance.findByType("ActivityIndicator");
-    expect(loadingIndicator).toBeTruthy();
+  it("Will show an Activity when the photos haven't been loaded", async () => {
+    render(<NoticeSlidesPage notice={mockNotice} />);
+    const activityIndicator = screen.getByTestId("notice-activity-indicator");
+    expect(activityIndicator).toBeTruthy();
   });
 
-  it("Will no longer show Activity after image is loaded", () => {
-    act(() => instance.findByType("Image").props.onLoadEnd());
-    const updatedLoadingIndicator = instance.findAllByType("ActivityIndicator");
-    expect(updatedLoadingIndicator.length).toBe(0);
+  it("Will no longer show Activity after the image is loaded", async () => {
+    render(<NoticeSlidesPage notice={mockNotice} />);
+    const image = screen.getByTestId("notice-image");
+    await act(async () => await image.props.onLoadEnd());
+    const activityIndicator = screen.queryByTestId("notice-activity-indicator");
+    expect(activityIndicator).toBeNull();
   });
 
-  it("Will have a default image if no url", () => {
-    const componentWithoutURL = create(
-      <NoticeSlidesPage notice={mockNoticeWithoutURL} />
-    );
-    instanceWithoutURL = componentWithoutURL.root;
-    const imageElementWithoutURL = instance.findByType("Image");
-    expect(imageElementWithoutURL.props.source).toEqual(defaultImage);
+  it("Will have a default image if no URL", async () => {
+    render(<NoticeSlidesPage notice={mockNoticeWithoutURL} />);
+    const image = screen.getByTestId("notice-image");
+    expect(image.props.source).toEqual(defaultImage);
   });
 });

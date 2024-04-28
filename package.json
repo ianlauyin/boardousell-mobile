@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "jest": {
+    "detectOpenHandles": true,
     "preset": "jest-expo"
   },
   "scripts": {

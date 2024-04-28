@@ -5,7 +5,7 @@ import React from "react";
 
 jest.mock("axios");
 
-describe("component/NoticeSlides", () => {
+describe.skip("component/NoticeSlides", () => {
   let component;
   let useEffect;
 

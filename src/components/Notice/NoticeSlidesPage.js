@@ -14,10 +14,14 @@ export default function NoticeSlidesPage({ notice }) {
       <View className="w-full h-44">
         {isLoading && (
           <View className="absolute">
-            <ActivityIndicator size="large" />
+            <ActivityIndicator
+              testID="notice-activity-indicator"
+              size="large"
+            />
           </View>
         )}
         <Image
+          testID="notice-image"
           source={noticeImage}
           onLoadEnd={handleImageLoaded}
           className="w-full h-full"
